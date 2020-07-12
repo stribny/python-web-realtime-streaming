@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Real time streaming</title>
+        <script src="https://d3js.org/d3-array.v2.min.js"></script>
+        <script src="https://d3js.org/d3-color.v1.min.js"></script>
+        <script src="https://d3js.org/d3-format.v1.min.js"></script>
+        <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+        <script src="https://d3js.org/d3-time.v1.min.js"></script>
+        <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
+        <script src="https://d3js.org/d3-scale.v3.min.js"></script>
+        <script src="https://d3js.org/d3-selection.v1.min.js"></script>
+        <script src="https://d3js.org/d3-axis.v1.min.js"></script>
+        <script src="https://huww98.github.io/TimeChart/dist/timechart.min.js"></script>
+        <style>
+            #chart { width: 100%; height: 300px; margin-top: 300px; }
+        </style>
+    </head>
+    <body>
+        <div id="chart"></div>
+        <script>
+            const el = document.getElementById('chart');
+            const dataPoints = [];
+            const chart = new TimeChart(el, {
+                series: [{ data: dataPoints, name: 'Real-time measurement streaming', color: 'darkblue' }],
+                realTime: true,
+                xRange: { min: 0, max: 200 },
+            });
+            const ws = new WebSocket("ws://localhost:8000/ws");     
+            let x = 0;
+            ws.onmessage = function(event) {
+                const measurement = JSON.parse(event.data);
+                x += 1
+                dataPoints.push({x, y: measurement.value});
+                chart.update();
+            };
+        </script>
+    </body>
+</html>
