@@ -2,16 +2,16 @@
 <html>
     <head>
         <title>Real time streaming</title>
-        <script src="https://d3js.org/d3-array.v2.min.js"></script>
-        <script src="https://d3js.org/d3-color.v1.min.js"></script>
-        <script src="https://d3js.org/d3-format.v1.min.js"></script>
-        <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
-        <script src="https://d3js.org/d3-time.v1.min.js"></script>
-        <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
-        <script src="https://d3js.org/d3-scale.v3.min.js"></script>
-        <script src="https://d3js.org/d3-selection.v1.min.js"></script>
-        <script src="https://d3js.org/d3-axis.v1.min.js"></script>
-        <script src="https://huww98.github.io/TimeChart/dist/timechart.min.js"></script>
+        <script src="./../static/js/d3-array.v2.min.js"></script>
+        <script src="./../static/js/d3-color.v1.min.js"></script>
+        <script src="./../static/js/d3-format.v1.min.js"></script>
+        <script src="./../static/js/d3-interpolate.v1.min.js"></script>
+        <script src="./../static/js/d3-time.v1.min.js"></script>
+        <script src="./../static/js/d3-time-format.v2.min.js"></script>
+        <script src="./../static/js/d3-scale.v3.min.js"></script>
+        <script src="./../static/js/d3-selection.v1.min.js"></script>
+        <script src="./../static/js/d3-axis.v1.min.js"></script>
+        <script src="./../static/js/timechart.min.js"></script>
         <style>
             #chart { width: 100%; height: 300px; margin-top: 300px; }
         </style>
@@ -30,6 +30,7 @@
             let x = 0;
             ws.onmessage = function(event) {
                 const measurement = JSON.parse(event.data);
+                console.log("ws.onmessage:",measurement)
                 x += 1
                 dataPoints.push({x, y: measurement.value});
                 chart.update();
