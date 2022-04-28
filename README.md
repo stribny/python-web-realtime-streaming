@@ -7,3 +7,8 @@ To run the example install Poetry and then execute:
 poetry install && poetry shell
 uvicorn main:app --reload
 ```
+
+##known issues
+
+https://lifesaver.codes/answer/warning-unsupported-upgrade-request-2209
+
